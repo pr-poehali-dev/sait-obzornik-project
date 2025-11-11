@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -143,6 +144,7 @@ const reviews: Review[] = [
 ];
 
 const Index = () => {
+  const navigate = useNavigate();
   const [selectedCategory, setSelectedCategory] = useState('Все');
 
   const filteredReviews = selectedCategory === 'Все' 
@@ -296,7 +298,10 @@ const Index = () => {
                       ))}
                     </ul>
                   </div>
-                  <Button className={`w-full bg-gradient-to-r ${review.gradient} text-white hover:opacity-90 transition-opacity shadow-md`}>
+                  <Button 
+                    onClick={() => navigate(`/review/${review.id}`)}
+                    className={`w-full bg-gradient-to-r ${review.gradient} text-white hover:opacity-90 transition-opacity shadow-md`}
+                  >
                     <Icon name="ExternalLink" size={16} className="mr-2" />
                     Читать полный обзор
                   </Button>
